@@ -1,3 +1,3 @@
-export interface LogoProps extends HTMLOrSVGElement {
-  fill: string
+export interface LogoProps {
+  fillBG: string
 }
