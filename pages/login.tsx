@@ -1,7 +1,13 @@
 import React from "react"
+import { GlobalStyles } from "../styles/global"
 
 const Login = () => {
-  return <></>
+  return (
+    <>
+      <GlobalStyles />
+      testing
+    </>
+  )
 }
 
 export default Login

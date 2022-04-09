@@ -10,7 +10,7 @@ export const GlobalSettingsVariables: GlobalVariables = {
   boxSizing: "border-box",
 }
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
   * {
     font-family: ${GlobalSettingsVariables.fontFamily}, sans-serif;
     font-size: ${GlobalSettingsVariables.fontSize};
