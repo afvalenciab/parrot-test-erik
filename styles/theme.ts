@@ -1,10 +1,12 @@
 import { Theme } from "./theme.interfaces"
+import { brandColors } from "./colors"
 
 export const LightMode: Theme = {
   name: "LightMode",
   fontFamily: "Roboto",
   fontColor: "#333",
   backgroundColor: "#fff",
+  mainColor: brandColors.main,
   breakpoints: {
     mobile: 369,
     tablet: 768,
@@ -17,6 +19,7 @@ export const DarkMode: Theme = {
   fontFamily: "Roboto",
   fontColor: "#fff",
   backgroundColor: "#333",
+  mainColor: brandColors.main,
   breakpoints: {
     mobile: 369,
     tablet: 768,

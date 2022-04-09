@@ -1,11 +1,16 @@
 import React from "react"
 import { GlobalStyles } from "../styles/global"
-
+import { StyledLoginWrapper } from "../styles/login/login.styles"
+import Logo from "../components/Logo/Logo"
 const Login = () => {
   return (
     <>
       <GlobalStyles />
-      testing
+      <StyledLoginWrapper>
+        <div className='login--logo-wrapper'>
+          <Logo fill='#ffffff' />
+        </div>
+      </StyledLoginWrapper>
     </>
   )
 }
