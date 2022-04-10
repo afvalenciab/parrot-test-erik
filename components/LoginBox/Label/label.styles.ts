@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { brandColors } from "../../../styles/colors"
 
 export const StyledLabel = styled.label`
   font-size: 0.9em;
@@ -8,5 +9,8 @@ export const StyledLabel = styled.label`
 
   & + input {
     display: block;
+  }
+  span {
+    color: ${brandColors.main};
   }
 `

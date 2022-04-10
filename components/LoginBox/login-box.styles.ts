@@ -1,6 +1,5 @@
 import styled from "styled-components"
-
-export const StyledLoginBox = styled.div`
+export const StyledLoginBox = styled.form`
   width: 90%;
   max-width: 33.125em;
   background: #fff;
@@ -9,6 +8,7 @@ export const StyledLoginBox = styled.div`
   margin: 0 auto;
   margin-top: 2.2em;
   box-shadow: -3px 4px 7px 0px #6c6c6c;
+  position: relative;
 
   .login-box--field-wrapper {
     margin: 0.7em 0;
@@ -28,5 +28,11 @@ export const StyledLoginBox = styled.div`
   }
   .login-box--submit {
     margin-top: 2em;
+  }
+  .login-box--error {
+    color: #b62a2a;
+    font-size: 0.85em;
+    margin-top: 0.6em;
+    text-decoration: underline;
   }
 `

@@ -3,6 +3,7 @@ import { GlobalStyles } from "../styles/global"
 import { StyledLoginWrapper } from "../styles/login/login.styles"
 import Logo from "../components/Logo/Logo"
 import LoginBox from "../components/LoginBox/LoginBox"
+
 const Login = () => {
   return (
     <>
