@@ -8,7 +8,7 @@ export const StyledHeaderWrapper = styled.section`
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
-    position: fixed;
+    position: sticky;
     width: 100%;
     right: 0;
     left: 0;
