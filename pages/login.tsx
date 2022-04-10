@@ -11,7 +11,9 @@ const Login = () => {
         <div className='login--logo-wrapper'>
           <Logo fillBG='#ffffff' />
         </div>
-        <LoginBox />
+        <div className='login--login-box-wrapper'>
+          <LoginBox />
+        </div>
       </StyledLoginWrapper>
     </>
   )

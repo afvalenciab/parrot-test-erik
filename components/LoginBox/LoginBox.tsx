@@ -1,21 +1,26 @@
 import * as React from "react"
 import { StyledLoginBox } from "./login-box.styles"
 import Input from "./Input/Input"
-const LoginBox = React.forwardRef(({ ...props }) => {
+import Label from "./Label/Label"
+const LoginBox = ({ ...props }) => {
   return (
-    <StyledLoginBox>
+    <StyledLoginBox {...props}>
       <div>
-        <div>
+        <div className='login-box--field-wrapper'>
+          <Label>Correo Electronico</Label>
           <Input type='text' />
         </div>
-        <div>{/* Input here */}</div>
+        <div className='login-box--field-wrapper'>
+          <Label>Contraseña</Label>
+          <Input type='password' />
+        </div>
       </div>
-      <div>
+      <div className='login-box--forgot-password'>
         <span>Olvidé mi contraseña</span>
       </div>
       <div>{/* Button here */}</div>
     </StyledLoginBox>
   )
-})
+}
 
 export default LoginBox

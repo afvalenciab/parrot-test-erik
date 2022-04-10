@@ -7,8 +7,13 @@ export const StyledLoginWrapper = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
   .login--logo-wrapper {
     width: 80%;
     max-width: 250px;
+  }
+  .login--login-box-wrapper {
+    width: 100%;
   }
 `
