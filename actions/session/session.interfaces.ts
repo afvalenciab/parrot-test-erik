@@ -7,6 +7,6 @@ export interface SessionActionsProps {
 }
 
 export interface SessionProps {
-  access: string
-  refresh: string
+  access: string | undefined
+  refresh: string | undefined
 }
