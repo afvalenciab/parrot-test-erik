@@ -11,7 +11,9 @@ import { connect } from "react-redux"
 import { storeSession } from "../../actions/session/session"
 import useStorage from "../../utils/hooks/useStorage"
 import { SessionProps } from "../../actions/session/session.interfaces"
+import { useRouter } from "next/router"
 const LoginBox = ({ ...props }) => {
+  const router = useRouter()
   const { setItem } = useStorage()
   const {
     register,
@@ -24,7 +26,6 @@ const LoginBox = ({ ...props }) => {
     setShowLoader(true)
     insecurePostToAPI("/api/auth/token", loginData)
       .then((response: any) => {
-        console.log(response.data, " response")
         const hasErrorStatus = response.status !== 200
         if (hasErrorStatus) throw response
         const userData: SessionProps = {
@@ -36,6 +37,7 @@ const LoginBox = ({ ...props }) => {
           refresh: response.data.refresh,
         })
         setItem("userData", JSON.stringify(userData), "session")
+        router.push("/store")
       })
       .catch((err) => console.error(err))
       .finally(() => setShowLoader(false))

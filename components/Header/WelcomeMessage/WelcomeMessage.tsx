@@ -27,7 +27,7 @@ const ChefsHat = (props: any) => (
 const WelcomeMessage = ({ ...props }: any) => {
   return (
     <StyledWelcomeMessage>
-      <span>¡Bienvenido Erik Almaraz!</span>
+      <span>¡Bienvenido a tu panel de administración!</span>
       <span>
         <ChefsHat />
       </span>

@@ -1,11 +1,16 @@
-import React from "react"
+import React, { useEffect } from "react"
 import StoreBase from "../templates/store.base"
 import StoreName from "../components/StoreName/StoreName"
 import { StyledStoreWrapper } from "../styles/store/store.styles"
 import ProductColumn from "../components/ProductColumn/ProductColumn"
 import Product from "../components/Product/Product"
+import { connect } from "react-redux"
+import { storeSession } from "../actions/session/session"
 
-const Store = () => {
+const Store = (session: any) => {
+  useEffect(() => {
+    console.log(session, "session one")
+  }, [session])
   return (
     <>
       <StoreBase>
@@ -131,4 +136,4 @@ const Store = () => {
   )
 }
 
-export default Store
+export default connect((state) => state, {})(Store)

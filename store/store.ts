@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore, Middleware, Store } from "redux"
 import { createWrapper, MakeStore, Context } from "next-redux-wrapper"
-import reducers from "./../reducers"
+import reducers from "../reducers"
 import thunkMiddleware from "redux-thunk"
 
 const bindMiddleware = (middleware: Middleware) => {
