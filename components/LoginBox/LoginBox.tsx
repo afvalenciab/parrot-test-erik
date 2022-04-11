@@ -9,8 +9,10 @@ import { insecurePostToAPI } from "../../requests/fetch"
 import Loader from "../Loader/Loader"
 import { connect } from "react-redux"
 import { storeSession } from "../../actions/session/session"
-
+import useStorage from "../../utils/hooks/useStorage"
+import { SessionProps } from "../../actions/session/session.interfaces"
 const LoginBox = ({ ...props }) => {
+  const { setItem } = useStorage()
   const {
     register,
     handleSubmit,
@@ -22,8 +24,18 @@ const LoginBox = ({ ...props }) => {
     setShowLoader(true)
     insecurePostToAPI("/api/auth/token", loginData)
       .then((response: any) => {
+        console.log(response.data, " response")
         const hasErrorStatus = response.status !== 200
         if (hasErrorStatus) throw response
+        const userData: SessionProps = {
+          access: response.data.access,
+          refresh: response.data.refresh,
+        }
+        storeSession({
+          access: response.data.access,
+          refresh: response.data.refresh,
+        })
+        setItem("userData", JSON.stringify(userData), "session")
       })
       .catch((err) => console.error(err))
       .finally(() => setShowLoader(false))
@@ -69,5 +81,4 @@ const LoginBox = ({ ...props }) => {
   )
 }
 
-export default LoginBox
-// export default connect((state) => state, { storeSession })(LoginBox)
+export default connect((state) => state, { storeSession })(LoginBox)
