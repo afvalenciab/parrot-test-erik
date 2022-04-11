@@ -1,22 +1,66 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import StoreBase from "../templates/store.base"
 import StoreName from "../components/StoreName/StoreName"
 import { StyledStoreWrapper } from "../styles/store/store.styles"
 import ProductColumn from "../components/ProductColumn/ProductColumn"
 import Product from "../components/Product/Product"
 import { connect } from "react-redux"
-import { storeSession } from "../actions/session/session"
+import { fetchFromAPI } from "../requests/fetch"
+interface StoreProps {
+  session: {
+    access: string
+    refresh: string
+  }
+}
 
-const Store = (session: any) => {
+interface StoreInfo {
+  availabilityState: string
+  config: {}
+  name: string
+  uuid: string
+}
+
+const Store = ({ session }: StoreProps) => {
+  const { access: token } = session
+  const [storeInfo, setStoreInfo] = useState<StoreInfo>()
+  const [products, setProducts] = useState<any>()
+
+  const getStoreInfo = async () => {
+    const storeInfo = await fetchFromAPI(token, `/api/v1/users/me`)
+      .then((res) => {
+        const storeId: string = res.data?.result?.stores[0].uuid
+        getProducts(storeId)
+        return res.data?.result?.stores
+      })
+      .catch((e) => e)
+
+    setStoreInfo(storeInfo?.length > 0 ? storeInfo[0] : undefined)
+  }
+
+  const getProducts = async (storeId: string) => {
+    const products = await fetchFromAPI(
+      token,
+      `/api/v1/products/?store=${storeId}`
+    )
+      .then((res) => res.data)
+      .catch((e) => e)
+
+    console.log(products)
+    setProducts(products)
+  }
+
   useEffect(() => {
-    console.log(session, "session one")
-  }, [session])
+    const hasToken = token !== undefined
+    if (hasToken) {
+      getStoreInfo()
+    }
+  }, [token])
   return (
     <>
       <StoreBase>
         <StyledStoreWrapper>
           <div className='store--name'>
-            <StoreName>Dayri Queen</StoreName>
+            <StoreName>{storeInfo && storeInfo.name}</StoreName>
           </div>
           <div className='store--categories-wrapper'>
             <div className='store--categories-items'>

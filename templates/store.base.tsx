@@ -15,19 +15,25 @@ const StoreBase = ({ children }: any) => {
   const dispatch = useDispatch()
   const { getItem } = useStorage()
 
-  useEffect(() => {
+  const getUserSession = () => {
     const sessionData =
       getItem("userData", "session") &&
       JSON.parse(getItem("userData", "session"))
+
     if (sessionData) {
       const session: SessionProps = {
         access: sessionData.access,
         refresh: sessionData.refresh,
       }
+      console.log(session, " dispatching")
       dispatch(storeSession(session))
     } else {
       router.push("/login")
     }
+  }
+
+  useEffect(() => {
+    getUserSession()
   }, [])
 
   return (

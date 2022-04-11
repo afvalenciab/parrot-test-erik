@@ -7,7 +7,14 @@ const combinedReducer = combineReducers({
 })
 
 const reducers: Reducer = (state, action: any) => {
-  return combinedReducer(state, action)
+  if (action.type === HYDRATE) {
+    return {
+      ...state,
+      ...action.payload,
+    }
+  } else {
+    return combinedReducer(state, action)
+  }
 }
 
 export default reducers

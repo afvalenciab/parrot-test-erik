@@ -37,7 +37,6 @@ export async function fetchFromAPI(token: string, path: string) {
       throw new Error(resp)
     }
   }
-
   const requestURL = getApiUrl(path)
   return await axios
     .get(requestURL, {
@@ -74,7 +73,6 @@ export async function insecurePostToAPI(path: string, data: any) {
 
 export async function postToAPI(token: string, path: string, data: any) {
   const parseJSON = (resp: any) => (resp.json ? resp.json() : resp)
-
   const checkStatus = (resp: any) => {
     if (resp.status >= 200 && resp.status < 300) {
       return parseJSON(resp)
