@@ -24,6 +24,7 @@ const Store = ({ session }: StoreProps) => {
   const { access: token } = session
   const [storeInfo, setStoreInfo] = useState<StoreInfo>()
   const [products, setProducts] = useState<any>()
+  const [categories, setCategories] = useState<any>()
 
   const getStoreInfo = async () => {
     const storeInfo = await fetchFromAPI(token, `/api/v1/users/me`)
@@ -42,11 +43,21 @@ const Store = ({ session }: StoreProps) => {
       token,
       `/api/v1/products/?store=${storeId}`
     )
-      .then((res) => res.data)
+      .then((res) => res.data.results)
       .catch((e) => e)
-
     console.log(products)
     setProducts(products)
+    getCategories()
+  }
+
+  const getCategories = () => {
+    let categories: string[] = []
+    products.forEach((product: { category: { name: string } }) => {
+      categories.push(product?.category.name)
+    })
+    categories = Array.from(new Set(categories))
+
+    setCategories(categories)
   }
 
   useEffect(() => {
@@ -63,116 +74,26 @@ const Store = ({ session }: StoreProps) => {
             <StoreName>{storeInfo && storeInfo.name}</StoreName>
           </div>
           <div className='store--categories-wrapper'>
-            <div className='store--categories-items'>
-              <ProductColumn name='Promociones' quantity={2}>
-                <Product
-                  image='https://images.pexels.com/photos/1848973/pexels-photo-1848973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                  name='Galleta de chocolate'
-                  description='Esta es la descripción de la galleta, tiene muchas chispas, 120 gramos es el total de la misma.'
-                  price={10}
-                  available={true}
-                />
-                <Product
-                  image='https://images.pexels.com/photos/1848973/pexels-photo-1848973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                  name='Galleta de chocolate'
-                  description='Esta es la descripción de la galleta, tiene muchas chispas, 120 gramos es el total de la misma.'
-                  price={10}
-                  available={true}
-                />
-                <Product
-                  image='https://images.pexels.com/photos/1848973/pexels-photo-1848973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                  name='Galleta de chocolate'
-                  description='Esta es la descripción de la galleta, tiene muchas chispas, 120 gramos es el total de la misma.'
-                  price={10}
-                  available={true}
-                />
-              </ProductColumn>
-            </div>
-            <div className='store--categories-items'>
-              <ProductColumn name='Combos' quantity={3}>
-                <Product
-                  image='https://images.pexels.com/photos/1848973/pexels-photo-1848973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                  name='Galleta de chocolate'
-                  description='Esta es la descripción de la galleta, tiene muchas chispas, 120 gramos es el total de la misma.'
-                  price={10}
-                  available={true}
-                />
-                <Product
-                  image='https://images.pexels.com/photos/1848973/pexels-photo-1848973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                  name='Galleta de chocolate'
-                  description='Esta es la descripción de la galleta, tiene muchas chispas, 120 gramos es el total de la misma.'
-                  price={10}
-                  available={true}
-                />
-                <Product
-                  image='https://images.pexels.com/photos/1848973/pexels-photo-1848973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                  name='Galleta de chocolate'
-                  description='Esta es la descripción de la galleta, tiene muchas chispas, 120 gramos es el total de la misma.'
-                  price={10}
-                  available={true}
-                />
-                <Product
-                  image='https://images.pexels.com/photos/1848973/pexels-photo-1848973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                  name='Galleta de chocolate'
-                  description='Esta es la descripción de la galleta, tiene muchas chispas, 120 gramos es el total de la misma.'
-                  price={10}
-                  available={true}
-                />
-                <Product
-                  image='https://images.pexels.com/photos/1848973/pexels-photo-1848973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                  name='Galleta de chocolate'
-                  description='Esta es la descripción de la galleta, tiene muchas chispas, 120 gramos es el total de la misma.'
-                  price={10}
-                  available={true}
-                />
-              </ProductColumn>
-            </div>
-            <div className='store--categories-items'>
-              <ProductColumn name='Comida' quantity={5}>
-                <Product
-                  image='https://images.pexels.com/photos/1848973/pexels-photo-1848973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                  name='Galleta de chocolate'
-                  description='Esta es la descripción de la galleta, tiene muchas chispas, 120 gramos es el total de la misma.'
-                  price={10}
-                  available={true}
-                />
-                <Product
-                  image='https://images.pexels.com/photos/1848973/pexels-photo-1848973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                  name='Galleta de chocolate'
-                  description='Esta es la descripción de la galleta, tiene muchas chispas, 120 gramos es el total de la misma.'
-                  price={10}
-                  available={true}
-                />
-                <Product
-                  image='https://images.pexels.com/photos/1848973/pexels-photo-1848973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                  name='Galleta de chocolate'
-                  description='Esta es la descripción de la galleta, tiene muchas chispas, 120 gramos es el total de la misma.'
-                  price={10}
-                  available={true}
-                />
-                <Product
-                  image='https://images.pexels.com/photos/1848973/pexels-photo-1848973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                  name='Galleta de chocolate'
-                  description='Esta es la descripción de la galleta, tiene muchas chispas, 120 gramos es el total de la misma.'
-                  price={10}
-                  available={true}
-                />
-                <Product
-                  image='https://images.pexels.com/photos/1848973/pexels-photo-1848973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                  name='Galleta de chocolate'
-                  description='Esta es la descripción de la galleta, tiene muchas chispas, 120 gramos es el total de la misma.'
-                  price={10}
-                  available={true}
-                />
-                <Product
-                  image='https://images.pexels.com/photos/1848973/pexels-photo-1848973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                  name='Galleta de chocolate'
-                  description='Esta es la descripción de la galleta, tiene muchas chispas, 120 gramos es el total de la misma.'
-                  price={10}
-                  available={true}
-                />
-              </ProductColumn>
-            </div>
+            {categories?.map((category: string) => (
+              <div className='store--categories-items'>
+                <ProductColumn name={category} quantity={2}>
+                  {products?.map(
+                    (product: any) =>
+                      product.category.name === category && (
+                        <Product
+                          image={product.imageUrl}
+                          name={product.name}
+                          description={product.description}
+                          price={product.price}
+                          available={
+                            product.availability === "AVAILABLE" ? true : false
+                          }
+                        />
+                      )
+                  )}
+                </ProductColumn>
+              </div>
+            ))}
           </div>
         </StyledStoreWrapper>
       </StoreBase>
