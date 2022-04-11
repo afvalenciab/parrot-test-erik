@@ -45,14 +45,13 @@ const Store = ({ session }: StoreProps) => {
     )
       .then((res) => res.data.results)
       .catch((e) => e)
-    console.log(products)
     setProducts(products)
-    getCategories()
+    getCategories(products)
   }
 
-  const getCategories = () => {
+  const getCategories = (products: any) => {
     let categories: string[] = []
-    products.forEach((product: { category: { name: string } }) => {
+    products?.forEach((product: { category: { name: string } }) => {
       categories.push(product?.category.name)
     })
     categories = Array.from(new Set(categories))
@@ -75,12 +74,13 @@ const Store = ({ session }: StoreProps) => {
           </div>
           <div className='store--categories-wrapper'>
             {categories?.map((category: string) => (
-              <div className='store--categories-items'>
+              <div key={category} className='store--categories-items'>
                 <ProductColumn name={category} quantity={2}>
                   {products?.map(
                     (product: any) =>
                       product.category.name === category && (
                         <Product
+                          key={product.uuid}
                           image={product.imageUrl}
                           name={product.name}
                           description={product.description}
