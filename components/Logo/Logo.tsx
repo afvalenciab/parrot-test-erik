@@ -1,14 +1,15 @@
 import * as React from "react"
 import { LogoProps } from "./logo.interfaces"
 
-const Logo = React.forwardRef<HTMLOrSVGElement, LogoProps>(
-  ({ fillBG, ...props }) => (
+const Logo = React.forwardRef<SVGSVGElement, LogoProps>(
+  ({ fillBG, ...props }, ref) => (
     <svg
       className='logo-dropdown logo logo--white'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 3141.4 1286.4'
       enableBackground='new 0 0 3141.4 1286.4'
       xmlSpace='preserve'
+      ref={ref}
       fill={fillBG}
       {...props}
     >

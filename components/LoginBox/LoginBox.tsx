@@ -21,9 +21,10 @@ const LoginBox = ({ ...props }) => {
     formState: { errors },
   } = useForm<LoginParams>()
   const [showLoader, setShowLoader] = useState<Boolean>(false)
-
+  const [accountError, setAccountError] = useState<boolean>(false)
   const onSubmit: SubmitHandler<LoginParams> = (loginData) => {
     setShowLoader(true)
+    setAccountError(false)
     insecurePostToAPI("/api/auth/token", loginData)
       .then((response: any) => {
         const hasErrorStatus = response.status !== 200
@@ -39,13 +40,20 @@ const LoginBox = ({ ...props }) => {
         setItem("userData", JSON.stringify(userData), "session")
         router.push("/store")
       })
-      .catch((err) => console.error(err))
+      .catch((err) => setAccountError(true))
       .finally(() => setShowLoader(false))
   }
 
   return (
     <StyledLoginBox {...props} onSubmit={handleSubmit(onSubmit)}>
       <div>
+        {accountError && (
+          <div>
+            <p className='login-box--error'>
+              Ups! Revisa tus datos de acceso. :(
+            </p>
+          </div>
+        )}
         <div className='login-box--field-wrapper'>
           <Label>
             Correo Electronico <span>*</span>

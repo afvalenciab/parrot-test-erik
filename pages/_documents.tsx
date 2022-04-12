@@ -38,7 +38,10 @@ export default class MyDocument extends Document {
   render(): JSX.Element {
     return (
       <Html>
-        <Head />
+        <Head>
+          <link rel='shortcut icon' href='/favicon.ico' />
+          <title>Parrot - Erik Almaraz - Test</title>
+        </Head>
         <body>
           <Main />
           <NextScript />

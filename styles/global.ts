@@ -11,6 +11,10 @@ export const GlobalSettingsVariables: GlobalVariables = {
 }
 
 export const GlobalStyles = createGlobalStyle`
+  :root {
+    font-size: ${GlobalSettingsVariables.fontSize};
+  }
+
   body {
     background: ${({ theme }: { theme: { backgroundColor: string } }) =>
       theme ? theme.backgroundColor : "#fff"}
@@ -21,5 +25,10 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: ${GlobalSettingsVariables.boxSizing};
     padding: ${GlobalSettingsVariables.paddingSize};
     margin: ${GlobalSettingsVariables.marginSize};
+  }
+  @media screen and (max-width: 960px) {
+    * {
+      font-size: 15px;
+    }
   }
 `

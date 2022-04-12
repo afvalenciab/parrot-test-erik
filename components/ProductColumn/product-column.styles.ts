@@ -4,6 +4,7 @@ export const StyledProductColumn = styled.div`
   .product-column--info {
     font-weight: bold;
     display: flex;
+    cursor: pointer;
     div {
       font-size: 1.1em;
       color: ${({ theme }) => theme.fontColor};

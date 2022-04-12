@@ -13,6 +13,10 @@ export const StyledStoreWrapper = styled.div`
     margin-top: 5.125em;
   }
 
+  .closed-column {
+    display: none;
+  }
+
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}px) {
     .store--categories-items {
       width: 45%;

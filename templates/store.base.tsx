@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { GlobalStyles } from "../styles/global"
 import { ThemeProvider } from "styled-components"
 import { LightMode, DarkMode } from "../styles/theme"
@@ -13,12 +13,12 @@ import { useRouter } from "next/router"
 const StoreBase = ({ children }: any) => {
   const router = useRouter()
   const dispatch = useDispatch()
-  const { getItem } = useStorage()
-
+  const { getItem: getItemStorage, setItem: setItemStorage } = useStorage()
+  const [theme, setTheme] = useState<string>("light")
   const getUserSession = () => {
     const sessionData =
-      getItem("userData", "session") &&
-      JSON.parse(getItem("userData", "session"))
+      getItemStorage("userData", "session") &&
+      JSON.parse(getItemStorage("userData", "session"))
 
     if (sessionData) {
       const session: SessionProps = {
@@ -31,15 +31,28 @@ const StoreBase = ({ children }: any) => {
     }
   }
 
+  const handleTheme = (theme: string) => {
+    console.log(theme, " theme")
+    setItemStorage("theme", theme)
+    setTheme(theme)
+  }
+
+  const getTheme = () => {
+    const savedTheme = getItemStorage("theme")
+    const hasSavedTheme = savedTheme !== null
+    if (hasSavedTheme) setTheme(savedTheme)
+  }
+
   useEffect(() => {
     getUserSession()
+    getTheme()
   }, [])
 
   return (
     <>
-      <ThemeProvider theme={LightMode}>
+      <ThemeProvider theme={theme === "light" ? LightMode : DarkMode}>
         <GlobalStyles />
-        <Header />
+        <Header currentTheme={theme} handleTheme={handleTheme} />
         <BaseWrapper>{children}</BaseWrapper>
       </ThemeProvider>
     </>

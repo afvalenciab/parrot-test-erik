@@ -21,27 +21,52 @@ export const StyledHeaderWrapper = styled.section`
     font-weight: 500;
   }
   .header--theme-switch {
-    position: absolute;
-    right: -180px;
+    position: relative;
     display: flex;
     align-items: center;
+    fill: ${({ theme }) => theme.fontColor};
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: 2em;
+    justify-content: end;
+    width: 85%;
   }
   .header--theme-switch--wrapper {
     min-width: 75px;
-    border: 2px solid #000;
+    border: 2px solid ${({ theme }) => theme.fontColor};
     padding: 3px 8px;
     border-radius: 50px;
     margin: 0 10px;
     cursor: pointer;
+    position: relative;
+    min-height: 24px;
   }
   .header--theme-switch--tracker {
     width: 15px;
     height: 15px;
-    background: #000;
+    background: ${({ theme }) => theme.fontColor};
     border-radius: 100%;
+    left: ${({ theme }) => (theme.name === "LightMode" ? "5px" : "51px")};
+    position: absolute;
+    transition left .4s ease;
   }
+
+  .header--interactions-wrapper {
+    display: flex;
+    align-items: baseline;
+    min-width: 470px;
+    justify-content: space-between;
+  }
+
+  @media screen and (max-width: 768px) {
+    .header--interactions-wrapper {
+      justify-content: end;
+      min-width: auto;
+    }
+  }
+
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}px) {
-    .header--interior-wrapper {
+    .header--interior-wrapper, .header--theme-switch{
       width: 90%;
     }
   }

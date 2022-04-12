@@ -92,13 +92,8 @@ export async function postToAPI(token: string, path: string, data: any) {
     .then(checkStatus)
     .catch((error: any) => error)
 }
-export async function deleteToAPI(
-  token: string,
-  path: string,
-  asset_type: string
-) {
+export async function putToAPI(token: string, path: string, data: any) {
   const parseJSON = (resp: any) => (resp.json ? resp.json() : resp)
-
   const checkStatus = (resp: any) => {
     if (resp.status >= 200 && resp.status < 300) {
       return parseJSON(resp)
@@ -109,13 +104,10 @@ export async function deleteToAPI(
 
   const requestURL = getApiUrl(path)
   return await axios
-    .delete(requestURL, {
+    .put(requestURL, data, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
-      },
-      data: {
-        asset_type: asset_type,
       },
     })
     .then(checkStatus)

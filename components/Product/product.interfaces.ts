@@ -6,4 +6,5 @@ export interface ProductProps {
   description: string
   price: string | number
   available: boolean
+  onChangeAvailability: () => void
 }

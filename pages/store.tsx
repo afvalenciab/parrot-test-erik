@@ -5,14 +5,13 @@ import { StyledStoreWrapper } from "../styles/store/store.styles"
 import ProductColumn from "../components/ProductColumn/ProductColumn"
 import Product from "../components/Product/Product"
 import { connect } from "react-redux"
-import { fetchFromAPI } from "../requests/fetch"
+import { fetchFromAPI, putToAPI } from "../requests/fetch"
 interface StoreProps {
   session: {
     access: string
     refresh: string
   }
 }
-
 interface StoreInfo {
   availabilityState: string
   config: {}
@@ -20,11 +19,23 @@ interface StoreInfo {
   uuid: string
 }
 
+interface Product {
+  key: string
+  imageUrl: string
+  name: string
+  description: string
+  price: string
+  availability: string
+  uuid: string
+  category: { name: string }
+}
+
 const Store = ({ session }: StoreProps) => {
   const { access: token } = session
   const [storeInfo, setStoreInfo] = useState<StoreInfo>()
   const [products, setProducts] = useState<any>()
   const [categories, setCategories] = useState<any>()
+  const [closedColumns, setClosedColumns] = useState<string[]>([])
 
   const getStoreInfo = async () => {
     const storeInfo = await fetchFromAPI(token, `/api/v1/users/me`)
@@ -59,6 +70,37 @@ const Store = ({ session }: StoreProps) => {
     setCategories(categories)
   }
 
+  const handleProductAvailabilitiy = async (
+    productId: string,
+    currentAvailability: string
+  ) => {
+    const newAvailability =
+      currentAvailability === "AVAILABLE" ? "UNAVAILABLE" : "AVAILABLE"
+
+    await putToAPI(token, `/api/v1/products/${productId}/availability`, {
+      availability: newAvailability,
+    })
+      .then((res) => {
+        getProducts(storeInfo?.uuid as string)
+      })
+      .catch((e) => e)
+  }
+
+  const closedColumnsHandler = (id: string) => {
+    const closedCoumnsClone = [...closedColumns]
+
+    const alreadyClosed = closedColumns.includes(id)
+    if (!alreadyClosed) {
+      closedCoumnsClone.push(id)
+    }
+    if (alreadyClosed) {
+      const index = closedCoumnsClone.indexOf(id)
+      closedCoumnsClone.splice(index, 1)
+    }
+
+    setClosedColumns(closedCoumnsClone)
+  }
+
   useEffect(() => {
     const hasToken = token !== undefined
     if (hasToken) {
@@ -73,22 +115,41 @@ const Store = ({ session }: StoreProps) => {
             <StoreName>{storeInfo && storeInfo.name}</StoreName>
           </div>
           <div className='store--categories-wrapper'>
-            {categories?.map((category: string) => (
+            {categories?.map((category: string, columnIndex: number) => (
               <div key={category} className='store--categories-items'>
-                <ProductColumn name={category} quantity={2}>
+                <ProductColumn
+                  name={category}
+                  onCloseColumn={() => closedColumnsHandler(category as string)}
+                >
                   {products?.map(
-                    (product: any) =>
+                    (product: Product) =>
                       product.category.name === category && (
-                        <Product
+                        <div
                           key={product.uuid}
-                          image={product.imageUrl}
-                          name={product.name}
-                          description={product.description}
-                          price={product.price}
-                          available={
-                            product.availability === "AVAILABLE" ? true : false
+                          className={
+                            closedColumns.includes(category)
+                              ? "closed-column"
+                              : ""
                           }
-                        />
+                        >
+                          <Product
+                            onChangeAvailability={() =>
+                              handleProductAvailabilitiy(
+                                product.uuid,
+                                product.availability
+                              )
+                            }
+                            image={product.imageUrl}
+                            name={product.name}
+                            description={product.description}
+                            price={product.price}
+                            available={
+                              product.availability === "AVAILABLE"
+                                ? true
+                                : false
+                            }
+                          />
+                        </div>
                       )
                   )}
                 </ProductColumn>

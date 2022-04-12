@@ -4,10 +4,11 @@ export const StyledProduct = styled.div`
   display: flex;
   margin-bottom: 3.125em;
   background: #fff;
-  border-radius: 41px;
+  border-radius: 9px;
   padding: 1.5em 1.5em;
   margin-right: 1.5em;
   line-height: 1.7em;
+  border: 1px solid #ddd;
 
   .product--image-wrapper {
     img {
@@ -59,5 +60,8 @@ export const StyledProduct = styled.div`
     width: 100%;
     margin-left: 1.5em;
     align-items: center;
+  }
+  .closed-column {
+    display: none;
   }
 `
