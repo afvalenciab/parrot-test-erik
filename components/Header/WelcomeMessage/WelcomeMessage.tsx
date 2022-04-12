@@ -1,7 +1,7 @@
 import * as React from "react"
 import { StyledWelcomeMessage } from "./welcome-message.style"
 
-const ChefsHat = (props: any) => (
+const ChefsHat = ({ ...props }) => (
   <svg
     width={41}
     height={41}
@@ -24,9 +24,9 @@ const ChefsHat = (props: any) => (
   </svg>
 )
 
-const WelcomeMessage = ({ ...props }: any) => {
+const WelcomeMessage = ({ ...props }) => {
   return (
-    <StyledWelcomeMessage>
+    <StyledWelcomeMessage {...props}>
       <span>¡Bienvenido a tu panel de administración!</span>
       <span>
         <ChefsHat />
