@@ -15,11 +15,31 @@ export const StyledHeaderWrapper = styled.section`
     max-width: 1400px;
     align-items: center;
     padding-top: 1.8em;
+    color: ${({ theme }) => theme.fontColor};
   }
   span {
     font-weight: 500;
   }
-
+  .header--theme-switch {
+    position: absolute;
+    right: -180px;
+    display: flex;
+    align-items: center;
+  }
+  .header--theme-switch--wrapper {
+    min-width: 75px;
+    border: 2px solid #000;
+    padding: 3px 8px;
+    border-radius: 50px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  .header--theme-switch--tracker {
+    width: 15px;
+    height: 15px;
+    background: #000;
+    border-radius: 100%;
+  }
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}px) {
     .header--interior-wrapper {
       width: 90%;

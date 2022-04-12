@@ -16,7 +16,9 @@ const Product = ({
       <div className='product--info'>
         <div className='product--name'>
           <div>{name}</div>
-          <div></div>
+          {available === false && (
+            <div className='product--availability'>Agotado</div>
+          )}
         </div>
         <div className='product--description'>{description}</div>
         <div className='product--price'>${price} MXN</div>

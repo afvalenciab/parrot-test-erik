@@ -6,6 +6,7 @@ export const StyledProductColumn = styled.div`
     display: flex;
     div {
       font-size: 1.1em;
+      color: ${({ theme }) => theme.fontColor};
     }
   }
   .product-column--products-list {

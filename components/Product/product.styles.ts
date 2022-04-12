@@ -22,6 +22,8 @@ export const StyledProduct = styled.div`
     margin-left: 1.25em;
   }
   .product--name {
+    display: flex;
+    align-items: center;
     margin-bottom: 0.5em;
     div {
       &:nth-child(1) {
@@ -45,5 +47,17 @@ export const StyledProduct = styled.div`
       margin-top: 0.7em;
       cursor: pointer;
     }
+  }
+  .product--availability {
+    background: ${brandColors.main};
+    font-size: 0.75em;
+    max-width: 6em;
+    color: #fff;
+    padding: 0em 0.1em;
+    text-align: center;
+    border-radius: 6px;
+    width: 100%;
+    margin-left: 1.5em;
+    align-items: center;
   }
 `

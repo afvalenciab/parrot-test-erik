@@ -25,7 +25,6 @@ const StoreBase = ({ children }: any) => {
         access: sessionData.access,
         refresh: sessionData.refresh,
       }
-      console.log(session, " dispatching")
       dispatch(storeSession(session))
     } else {
       router.push("/login")

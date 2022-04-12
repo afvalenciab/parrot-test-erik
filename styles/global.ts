@@ -13,7 +13,7 @@ export const GlobalSettingsVariables: GlobalVariables = {
 export const GlobalStyles = createGlobalStyle`
   body {
     background: ${({ theme }: { theme: { backgroundColor: string } }) =>
-      theme.backgroundColor}
+      theme ? theme.backgroundColor : "#fff"}
   }
   * {
     font-family: ${GlobalSettingsVariables.fontFamily}, sans-serif;
