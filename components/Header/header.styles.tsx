@@ -9,7 +9,7 @@ export const StyledHeaderWrapper = styled.section`
     justify-content: space-between;
     margin: 0 auto;
     position: sticky;
-    width: 100%;
+    width: 85%;
     right: 0;
     left: 0;
     max-width: 1400px;
@@ -18,5 +18,11 @@ export const StyledHeaderWrapper = styled.section`
   }
   span {
     font-weight: 500;
+  }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}px) {
+    .header--interior-wrapper {
+      width: 90%;
+    }
   }
 `

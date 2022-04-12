@@ -3,6 +3,12 @@ import { brandColors } from "../../styles/colors"
 export const StyledProduct = styled.div`
   display: flex;
   margin-bottom: 3.125em;
+  background: #fff;
+  border-radius: 41px;
+  padding: 1.5em 1.5em;
+  margin-right: 1.5em;
+  line-height: 1.7em;
+
   .product--image-wrapper {
     img {
       width: 3.125em;

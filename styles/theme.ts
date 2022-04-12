@@ -8,9 +8,8 @@ export const LightMode: Theme = {
   backgroundColor: "#fff",
   mainColor: brandColors.main,
   breakpoints: {
-    mobile: 369,
-    tablet: 768,
-    desktop: 960,
+    mobile: 640,
+    tablet: 960,
   },
 }
 
@@ -21,8 +20,7 @@ export const DarkMode: Theme = {
   backgroundColor: "#333",
   mainColor: brandColors.main,
   breakpoints: {
-    mobile: 369,
-    tablet: 768,
-    desktop: 960,
+    mobile: 640,
+    tablet: 960,
   },
 }

@@ -7,6 +7,5 @@ export interface Theme {
   breakpoints: {
     mobile: number
     tablet: number
-    desktop: number
   }
 }

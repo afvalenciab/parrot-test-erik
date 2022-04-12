@@ -12,4 +12,17 @@ export const StyledStoreWrapper = styled.div`
     width: 33%;
     margin-top: 5.125em;
   }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}px) {
+    .store--categories-items {
+      width: 45%;
+      margin-right: 5%;
+    }
+  }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.mobile}px) {
+    .store--categories-items {
+      width: 100%;
+    }
+  }
 `

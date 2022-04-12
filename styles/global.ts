@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components"
 import { GlobalVariables } from "./global.interfaces"
-
+import { Theme } from "./theme.interfaces"
 /* GLOBAL VARIABLES */
 export const GlobalSettingsVariables: GlobalVariables = {
   fontFamily: "Roboto",
@@ -11,6 +11,10 @@ export const GlobalSettingsVariables: GlobalVariables = {
 }
 
 export const GlobalStyles = createGlobalStyle`
+  body {
+    background: ${({ theme }: { theme: { backgroundColor: string } }) =>
+      theme.backgroundColor}
+  }
   * {
     font-family: ${GlobalSettingsVariables.fontFamily}, sans-serif;
     font-size: ${GlobalSettingsVariables.fontSize};

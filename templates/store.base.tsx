@@ -38,8 +38,8 @@ const StoreBase = ({ children }: any) => {
 
   return (
     <>
-      <GlobalStyles />
       <ThemeProvider theme={LightMode}>
+        <GlobalStyles />
         <Header />
         <BaseWrapper>{children}</BaseWrapper>
       </ThemeProvider>
