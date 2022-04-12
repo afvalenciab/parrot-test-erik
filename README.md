@@ -1,6 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
+
+Before run:
+
+1: Install dependencies
+
+```bash
+    yarn install
+```
+
+2: Create `.env.local` file in root with this variable
+
+```bash
+
+    NEXT_PUBLIC_API_URL='http://api-staging.parrot.rest'
+
+```
 
 First, run the development server:
 
