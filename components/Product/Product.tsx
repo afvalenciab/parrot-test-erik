@@ -38,5 +38,5 @@ const Product = forwardRef<HTMLDivElement, ProductProps>(
     )
   }
 )
-
+Product.displayName = "Product"
 export default Product

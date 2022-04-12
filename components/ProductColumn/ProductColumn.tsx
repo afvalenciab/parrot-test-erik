@@ -15,4 +15,5 @@ const ProductColumn = forwardRef<HTMLDivElement, ProductColumnProps>(
   }
 )
 
+ProductColumn.displayName = "ProductColumn"
 export default ProductColumn
